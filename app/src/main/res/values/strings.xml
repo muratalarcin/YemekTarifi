@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YemekTarifi</string>
+    <string name="app_name">YemenTariff</string>
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -48,4 +48,6 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="list_fragment">List Fragment</string>
+    <string name="detail_fragment">Detail Fragment</string>
 </resources>

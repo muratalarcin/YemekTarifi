@@ -1,4 +1,4 @@
-package com.muratalarcin.yemektarifi.ui.main
+package com.muratalarcin.yemektarifi.viewmodel
 
 import androidx.lifecycle.ViewModel
 
