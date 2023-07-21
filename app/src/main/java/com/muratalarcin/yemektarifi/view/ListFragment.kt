@@ -48,7 +48,7 @@ class ListFragment : Fragment() {
         viewModel.refreshData()
     }
 
-    fun observeLiveData() {
+    private fun observeLiveData() {
         viewModel.specifications.observe(viewLifecycleOwner, Observer { specification ->
             specification?.let {
                 binding.recyclerView.visibility = View.VISIBLE

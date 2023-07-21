@@ -4,19 +4,24 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.Navigator
 import androidx.recyclerview.widget.RecyclerView
 import com.muratalarcin.yemektarifi.R
 import com.muratalarcin.yemektarifi.model.Specification
+import com.muratalarcin.yemektarifi.view.DetailFragmentDirections
 
 class SpecificationAdapter(val specificationList: ArrayList<Specification>) :
     RecyclerView.Adapter<SpecificationAdapter.SpecificationViewHolder>() {
 
+    //private var onItemClickListener: AdapterView.OnItemClickListener? = null
     // ViewHolder sınıfını içeride tanımlayabilirsiniz.
     class SpecificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // ViewHolder içindeki view'lara burada erişebilirsiniz.
-        val nameTextView: TextView = itemView.findViewById(R.id.name)
-        val tagTextView: TextView = itemView.findViewById(R.id.tag)
+        val nameTextView: TextView = itemView.findViewById(R.id.rowName)
+        val tagTextView: TextView = itemView.findViewById(R.id.rowTag)
         // Diğer view'ları buraya ekleyebilirsiniz.
         // val descriptionTextView: TextView = itemView.findViewById(R.id.description)
         // val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -38,10 +43,12 @@ class SpecificationAdapter(val specificationList: ArrayList<Specification>) :
     override fun onBindViewHolder(holder: SpecificationViewHolder, position: Int) {
         val specification = specificationList[position]
         holder.nameTextView.text = specificationList[position].specificationName
-        holder.tagTextView.text = specificationList[position].tagName
-        // Diğer verileri de benzer şekilde yerleştirebilirsiniz.
-        // holder.descriptionTextView.text = specification.specificationDescription
-        // holder.imageView.setImageResource(specification.imageResource)
+        holder.tagTextView.text = specificationList[position].specificationTag
+
+        holder.itemView.setOnClickListener {
+            val action = DetailFragmentDirections.actionListFragmentToDetailFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

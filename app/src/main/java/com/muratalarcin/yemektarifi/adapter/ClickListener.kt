@@ -1,7 +1,7 @@
 package com.muratalarcin.yemektarifi.adapter
 
-import android.view.View
+import com.muratalarcin.yemektarifi.model.Specification
 
-interface ClickListener {
-    fun onClicked(v: View)
+interface OnItemClickListener {
+    fun onItemClick(specification: Specification)
 }
