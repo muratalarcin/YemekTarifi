@@ -6,6 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="data_not_obtained">If data cannot be obtained.</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -50,4 +51,5 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="list_fragment">List Fragment</string>
     <string name="detail_fragment">Detail Fragment</string>
+    <string name="to_detail_fragment">To Detail Fragment</string>
 </resources>
