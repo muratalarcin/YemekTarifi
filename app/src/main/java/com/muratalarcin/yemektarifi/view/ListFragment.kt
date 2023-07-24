@@ -46,6 +46,14 @@ class ListFragment : Fragment() {
 
         // Verileri LiveData'ya eklemek için refreshData() metodunu çağırın.
         viewModel.refreshData()
+
+        binding.swipeRefreshLayout.setOnRefreshListener{
+            binding.recyclerView.visibility = View.GONE
+            binding.errorText.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel.refreshData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun observeLiveData() {

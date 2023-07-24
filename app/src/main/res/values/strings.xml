@@ -52,4 +52,8 @@
     <string name="list_fragment">List Fragment</string>
     <string name="detail_fragment">Detail Fragment</string>
     <string name="to_detail_fragment">To Detail Fragment</string>
+    <string name="tag">Tag</string>
+    <string name="name">Name</string>
+    <string name="material">Material</string>
+    <string name="fabrication">Fabrication</string>
 </resources>

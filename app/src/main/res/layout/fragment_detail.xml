@@ -17,8 +17,9 @@
     <TextView
         android:id="@+id/detailName"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/name"
         android:textSize="24sp"
         android:textColor="@color/material_blue"
         android:textStyle="bold" />
@@ -28,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Tag"
+        android:gravity="center"
+        android:text="@string/tag"
         android:textSize="18sp"
         android:textColor="@color/material_gray" />
 
@@ -37,7 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Material"
+        android:gravity="center"
+        android:maxWidth="200dp"
+        android:text="@string/material"
         android:textSize="18sp"
         android:textColor="@color/material_gray" />
 
@@ -46,7 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Fabrication"
+        android:gravity="center"
+        android:maxWidth="200dp"
+        android:text="@string/fabrication"
         android:textSize="18sp"
         android:textColor="@color/material_gray" />
 
