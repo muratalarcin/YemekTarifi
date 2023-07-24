@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
-import androidx.navigation.Navigator
 import androidx.recyclerview.widget.RecyclerView
 import com.muratalarcin.yemektarifi.R
 import com.muratalarcin.yemektarifi.model.Specification
-import com.muratalarcin.yemektarifi.view.DetailFragmentDirections
+import com.muratalarcin.yemektarifi.util.downloadFromUrl
+import com.muratalarcin.yemektarifi.util.placeholderProgressBar
+import com.muratalarcin.yemektarifi.view.ListFragmentDirections
 
 class SpecificationAdapter(val specificationList: ArrayList<Specification>) :
     RecyclerView.Adapter<SpecificationAdapter.SpecificationViewHolder>() {
@@ -22,6 +23,7 @@ class SpecificationAdapter(val specificationList: ArrayList<Specification>) :
         // ViewHolder içindeki view'lara burada erişebilirsiniz.
         val nameTextView: TextView = itemView.findViewById(R.id.rowName)
         val tagTextView: TextView = itemView.findViewById(R.id.rowTag)
+        val imageView: ImageView = itemView.findViewById(R.id.rowImageView)
         // Diğer view'ları buraya ekleyebilirsiniz.
         // val descriptionTextView: TextView = itemView.findViewById(R.id.description)
         // val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -46,9 +48,15 @@ class SpecificationAdapter(val specificationList: ArrayList<Specification>) :
         holder.tagTextView.text = specificationList[position].specificationTag
 
         holder.itemView.setOnClickListener {
-            val action = DetailFragmentDirections.actionListFragmentToDetailFragment()
+            val action = ListFragmentDirections.actionListFragmentToDetailFragment(specification.uuid)
             Navigation.findNavController(it).navigate(action)
         }
+
+
+
+
+        holder.imageView.downloadFromUrl(specificationList[position].specificationImage, placeholderProgressBar(holder.itemView.context))
+
     }
 
     @SuppressLint("NotifyDataSetChanged")

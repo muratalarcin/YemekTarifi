@@ -8,7 +8,15 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.muratalarcin.yemektarifi.view.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+
+        <!-- DetailFragment içindeki specificationUuid adlı bir tamsayı argümanı ekle -->
+        <argument
+            android:name="specificationUuid"
+            app:argType="integer" />
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/listFragment"

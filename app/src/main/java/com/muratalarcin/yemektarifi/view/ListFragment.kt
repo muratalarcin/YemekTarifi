@@ -51,7 +51,7 @@ class ListFragment : Fragment() {
             binding.recyclerView.visibility = View.GONE
             binding.errorText.visibility = View.GONE
             binding.progressBar.visibility = View.VISIBLE
-            viewModel.refreshData()
+            viewModel.refreshDataFromAPI()
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }

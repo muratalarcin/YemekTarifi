@@ -10,11 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.muratalarcin.yemektarifi.R
 import com.muratalarcin.yemektarifi.databinding.FragmentDetailBinding
+import com.muratalarcin.yemektarifi.util.downloadFromUrl
+import com.muratalarcin.yemektarifi.util.placeholderProgressBar
 import com.muratalarcin.yemektarifi.viewmodel.DetailViewModel
 import com.muratalarcin.yemektarifi.viewmodel.ListViewModel
 
 class DetailFragment : Fragment() {
     private lateinit var viewModel: DetailViewModel
+    private var specificationUuid = 0
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -29,8 +32,12 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+            specificationUuid = DetailFragmentArgs.fromBundle(it).specificationUuid
+        }
+
         viewModel = ViewModelProvider(requireActivity()).get(DetailViewModel::class.java)
-        viewModel.getDataFromRoom()
+        viewModel.getDataFromRoom(specificationUuid)
         observeLiveData()
     }
 
@@ -41,6 +48,10 @@ class DetailFragment : Fragment() {
                 binding.detailTag.text = specification.specificationTag
                 binding.detailMaterial.text = specification.specificationMaterial
                 binding.detailFabrication.text = specification.specificationFabrication
+                context?.let {
+                    binding.detailImageView.downloadFromUrl(specification.specificationImage, placeholderProgressBar(it))
+                }
+
 
             }
         })
