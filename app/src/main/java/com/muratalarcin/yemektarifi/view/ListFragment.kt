@@ -3,11 +3,15 @@ package com.muratalarcin.yemektarifi.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muratalarcin.yemektarifi.R
 import com.muratalarcin.yemektarifi.adapter.SpecificationAdapter
@@ -16,7 +20,7 @@ import com.muratalarcin.yemektarifi.viewmodel.ListViewModel
 
 class ListFragment : Fragment() {
 
-    lateinit var viewModel: ListViewModel
+    private lateinit var viewModel: ListViewModel
     private val specificationAdapter = SpecificationAdapter(arrayListOf())
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -26,6 +30,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true) // SearchView'i etkinleştir
         return binding.root
     }
 
@@ -47,7 +52,7 @@ class ListFragment : Fragment() {
         // Verileri LiveData'ya eklemek için refreshData() metodunu çağırın.
         viewModel.refreshData()
 
-        binding.swipeRefreshLayout.setOnRefreshListener{
+        binding.swipeRefreshLayout.setOnRefreshListener {
             binding.recyclerView.visibility = View.GONE
             binding.errorText.visibility = View.GONE
             binding.progressBar.visibility = View.VISIBLE
@@ -84,9 +89,47 @@ class ListFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
             }
-
         })
 
+        viewModel.searchResult.observe(viewLifecycleOwner, Observer { searchResult ->
+            searchResult?.let {
+                // Search sonucuna göre adapter'ı güncelleyin
+                specificationAdapter.updateSpecificationList(searchResult)
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        // Burada actionLayout özelliğini belirttiğimiz layout dosyasını kullanıyoruz.
+        val searchViewCard = searchView.findViewById<CardView>(R.id.searchViewCard)
+
+        searchView.queryHint = "Yemek ara..."
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Kullanıcının metin girdiğinde, ListViewModel'deki searchSpecifications fonksiyonunu çağırarak aramayı gerçekleştirin.
+                viewModel.searchSpecifications(newText.orEmpty())
+                return true
+            }
+        })
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_search -> {
+                // SearchView'i açmak için gerekli işlemleri gerçekleştirin
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onDestroyView() {
@@ -94,4 +137,3 @@ class ListFragment : Fragment() {
         _binding = null
     }
 }
-

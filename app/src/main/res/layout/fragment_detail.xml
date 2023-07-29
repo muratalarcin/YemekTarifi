@@ -1,67 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/material_light_gray">
 
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="specification"
+            type="com.muratalarcin.yemektarifi.model.Specification"/>
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/material_light_gray"
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/detailImageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_launcher_background"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:id="@+id/detailName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/name"
-            android:textSize="24sp"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/detailTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="@string/tag"
-            android:textSize="18sp"
-            android:textColor="#FF3D00" />
+            <ImageView
+                android:id="@+id/detailImageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/detailMaterial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:maxWidth="200dp"
-            android:paddingTop="16dp"
-            android:text="@string/material"
-            android:textSize="18sp"
-            android:textColor="@color/design_default_color_secondary_variant" />
+            <TextView
+                android:id="@+id/detailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/name"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/detailFabrication"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:maxWidth="200dp"
-            android:text="@string/fabrication"
-            android:textSize="18sp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/detailTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/tag"
+                android:textColor="#FF3D00"
+                android:textSize="18sp" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/detailMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:maxWidth="200dp"
+                android:paddingTop="16dp"
+                android:text="@string/material"
+                android:textColor="@color/design_default_color_secondary_variant"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/detailFabrication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:maxWidth="200dp"
+                android:paddingTop="16dp"
+                android:text="@string/fabrication"
+                android:textColor="@android:color/holo_purple"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

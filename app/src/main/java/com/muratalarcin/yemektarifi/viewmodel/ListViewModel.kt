@@ -23,6 +23,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
     val specifications = MutableLiveData<List<Specification>>()
     val specificationError = MutableLiveData<Boolean>()
     val specificationLoading = MutableLiveData<Boolean>()
+    val searchResult = MutableLiveData<List<Specification>?>()
 
     // Verileri API'den almak için bu fonksiyonu çağırın
     fun refreshData() {
@@ -30,7 +31,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
         val updateTime = customPreferences.getTime()
         if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {
             getDataFromSQLite()
-        }else {
+        } else {
             getDataFromAPI()
         }
     }
@@ -42,7 +43,8 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
     private fun getDataFromSQLite() {
         specificationLoading.value = true
         launch {
-            val specifications = SpecificationDatabase(getApplication()).specificationDao().getAllSpecifications()
+            val specifications =
+                SpecificationDatabase(getApplication()).specificationDao().getAllSpecifications()
             showSpecifications(specifications)
             //Toast.makeText(getApplication(), "Specifications From SQLite", Toast.LENGTH_SHORT).show()
         }
@@ -93,6 +95,17 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
 
         customPreferences.saveTime(System.nanoTime())
 
+    }
+
+    fun searchSpecifications(query: String) {
+        launch {
+            // specifications listesini query'ye göre filtreleyip searchResult LiveData'sına atayın.
+            // Burada, specicationName alanındaki değeri query'ye göre filtreleyebilirsiniz.
+            val filteredList = specifications.value?.filter { specification ->
+                specification.specificationName!!.contains(query, ignoreCase = true)
+            }
+            searchResult.value = filteredList
+        }
     }
 
     // ViewModel yok edildiğinde, disposable nesnesini temizleyin
