@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<data>
+    <data>
         <variable
             name="specification"
             type="com.muratalarcin.yemektarifi.model.Specification" />
-        &lt;!&ndash;<variable
+        <variable
             name="listener"
-            type="com.muratalarcin.yemektarifi.adapter.SpecificationClickListener" />&ndash;&gt;
-    </data>-->
+            type="com.muratalarcin.yemektarifi.adapter.SpecificationClickListener" />
+    </data>
 
     <com.google.android.material.card.MaterialCardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:cardBackgroundColor="@color/material_light_gray"
-        app:cardCornerRadius="2dp">
+        app:cardCornerRadius="2dp"
+        >
 
-        <LinearLayout
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:minHeight="150dp"
             android:maxHeight="150dp"
-            android:padding="16dp">
+            android:padding="16dp"
+        >
         <!--android:onClick="@{listener::onSpecificationClicked}"-->
 
-            <!--<TextView
+            <TextView
                 android:id="@+id/specificationUuidText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text="@{String.valueOf(specification.uuid)}"/>-->
+                android:layout_width="466dp"
+                android:layout_height="367dp"
+                android:text="@{String.valueOf(specification.uuid)}"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/rowImageView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:downloadUrl="@{specification.specificationImage}"
                 android:layout_gravity="center_vertical"/>
                <!-- android:downloadUrl="@{specification.specificationImage}-->
                <!-- android:src="@drawable/ic_launcher_foreground"-->
@@ -57,7 +61,7 @@
                     android:id="@+id/rowName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
+                    android:text="@{specification.specificationName}"
                     android:textColor="#673AB7"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -66,7 +70,7 @@
                     android:id="@+id/rowTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tag"
+                    android:text="@{specification.specificationTag}"
                     android:textColor="@color/purple_200"
                     android:textSize="16sp" />
 

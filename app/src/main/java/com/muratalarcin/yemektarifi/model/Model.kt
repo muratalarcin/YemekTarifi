@@ -10,9 +10,7 @@ data class Specification(
     val specificationMaterial: String?,
     val specificationFabrication: String?,
     val specificationImage: String?
-)
-
-{
+) {
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
 }

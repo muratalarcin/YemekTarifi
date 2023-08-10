@@ -1,11 +1,8 @@
 package com.muratalarcin.yemektarifi.adapter
 
 import android.view.View
+import com.muratalarcin.yemektarifi.model.Specification
 
 interface SpecificationClickListener {
-
-    abstract val specification: Any
-
-    fun onSpecificationClicked(v: View)
-
+    fun onSpecificationClicked(v: View, specification: Specification)
 }
