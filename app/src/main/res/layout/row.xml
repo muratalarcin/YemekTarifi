@@ -57,6 +57,7 @@
                     android:id="@+id/rowName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:text="@string/name"
                     android:textColor="#673AB7"
                     android:textSize="18sp"
@@ -64,6 +65,7 @@
 
                 <TextView
                     android:id="@+id/rowTag"
+                    android:textAlignment="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tag"

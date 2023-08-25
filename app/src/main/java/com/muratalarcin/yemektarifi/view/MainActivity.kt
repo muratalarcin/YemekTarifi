@@ -1,9 +1,11 @@
 package com.muratalarcin.yemektarifi.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.RelativeLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -18,6 +20,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.splash_layout)
+
+        // Animasyonu başlat
+        val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        findViewById<RelativeLayout>(R.id.splash_layout).startAnimation(animation)
+        // Splash ekranını göstermek ve ana aktiviteye geçmek için Handler kullanımı
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Ana aktiviteyi başlat
+            startApp()
+        }, SPLASH_DURATION.toLong())
+    }
+
+    private fun startApp() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -33,4 +48,9 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navigationController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    companion object {
+        private const val SPLASH_DURATION = 2000 // saniye
+    }
 }
+

@@ -102,7 +102,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
             // specifications listesini query'ye göre filtreleyip searchResult LiveData'sına atayın.
             // Burada, specicationName alanındaki değeri query'ye göre filtreleyebilirsiniz.
             val filteredList = specifications.value?.filter { specification ->
-                specification.specificationName!!.contains(query, ignoreCase = true)
+                specification.specificationName!!.contains(query, ignoreCase = true) || specification.specificationTag!!.contains(query, ignoreCase = true)
             }
             searchResult.value = filteredList
         }

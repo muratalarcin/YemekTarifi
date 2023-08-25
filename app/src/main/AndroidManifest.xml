@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icon4"
+        android:icon="@drawable/lalala"
         android:label="Yemeğim"
         android:roundIcon="@drawable/icon1"
         android:supportsRtl="true"
