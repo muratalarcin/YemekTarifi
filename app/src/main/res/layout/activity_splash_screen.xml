@@ -1,0 +1,9 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash_screen_activity"
+    android:layout_width="400dp"
+    android:layout_height="400dp"
+    android:layout_gravity="center"
+    android:background="@drawable/round_background"
+    android:foreground="@drawable/ssss"
+    >
+</RelativeLayout>

@@ -13,7 +13,7 @@ android {
         applicationId "com.muratalarcin.yemektarifi"
         minSdk 29
         targetSdk 33
-        versionCode 1
+        versionCode 3
         versionName "1.0"
         viewBinding.enabled = true
 
@@ -61,7 +61,7 @@ def room_version = "2.5.0"
 def retrofitVersion = '2.9.0'
 def glideVersion = '4.13.2'
 def rxJavaVersion = '2.2.19'
-def rxAndroidVersion = '2.1.1' // RxAndroid kütüphanesi
+def rxAndroidVersion = '2.1.1'
 def preferencesVersion = '1.2.0'
 def appcompat_version = "1.6.1"
 dependencies {

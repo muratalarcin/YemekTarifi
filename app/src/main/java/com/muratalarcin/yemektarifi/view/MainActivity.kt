@@ -20,16 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_layout)
 
-        // Animasyonu başlat
-        val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        findViewById<RelativeLayout>(R.id.splash_layout).startAnimation(animation)
-        // Splash ekranını göstermek ve ana aktiviteye geçmek için Handler kullanımı
-        Handler(Looper.getMainLooper()).postDelayed({
-            // Ana aktiviteyi başlat
-            startApp()
-        }, SPLASH_DURATION.toLong())
+        startApp()
+
     }
 
     private fun startApp() {
@@ -49,8 +42,6 @@ class MainActivity : AppCompatActivity() {
         return navigationController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    companion object {
-        private const val SPLASH_DURATION = 2000 // saniye
-    }
+
 }
 

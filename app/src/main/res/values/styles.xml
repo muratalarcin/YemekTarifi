@@ -3,16 +3,11 @@
 
     <style name="Widget.Theme.YemekTarifi.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
+        <item name="android:windowLightStatusBar">@color/your_color</item>
     </style>
 
     <style name="Theme.YemekTarifi.Splash" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
 
-
-    <style name="Widget.Theme.YemekTarifi.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/black_overlay</item>
-        <item name="android:windowBackground">@drawable/lalala</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
-    </style>
 </resources>
