@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ic_favorite.xml -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M12,21.35L10.55,20.03C5.4,15.36 2,12.28 2,8.5C2,5.42 4.42,3 7.5,3c1.48,0 2.87,0.71 3.74,1.91L12,6.27l0.76-1.36C13.63,3.71 15.02,3 16.5,3c3.08,0 5.5,2.42 5.5,5.5c0,3.78 -3.4,6.86 -8.55,11.54L12,21.35Z"/>
+</vector>
+

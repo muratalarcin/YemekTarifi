@@ -1,6 +1,5 @@
 package com.muratalarcin.yemektarifi.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,59 +9,81 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.muratalarcin.yemektarifi.R
 import com.muratalarcin.yemektarifi.model.Specification
+import com.muratalarcin.yemektarifi.service.FavoriteDao
 import com.muratalarcin.yemektarifi.util.downloadFromUrl
 import com.muratalarcin.yemektarifi.util.placeholderProgressBar
 import com.muratalarcin.yemektarifi.view.ListFragmentDirections
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class SpecificationAdapter(val specificationList: ArrayList<Specification>) :
-    RecyclerView.Adapter<SpecificationAdapter.SpecificationViewHolder>() {
+class SpecificationAdapter(
+    private val specificationList: MutableList<Specification>,
+    private val favoriteDao: FavoriteDao
+) : RecyclerView.Adapter<SpecificationAdapter.SpecificationViewHolder>() {
 
-    //private var onItemClickListener: AdapterView.OnItemClickListener? = null
-    // ViewHolder sınıfını içeride tanımlayabilirsiniz.
-    class SpecificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // ViewHolder içindeki view'lara burada erişebilirsiniz.
+    inner class SpecificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var isFavorite: Boolean = false
+
         val nameTextView: TextView = itemView.findViewById(R.id.rowName)
         val tagTextView: TextView = itemView.findViewById(R.id.rowTag)
         val imageView: ImageView = itemView.findViewById(R.id.rowImageView)
-        // Diğer view'ları buraya ekleyebilirsiniz.
-        // val descriptionTextView: TextView = itemView.findViewById(R.id.description)
-        // val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        private val favoriteImageView: ImageView = itemView.findViewById(R.id.favIcon)
+
+        fun bind(specification: Specification) {
+            isFavorite = specification.isFavorite
+            updateFavoriteIcon()
+
+            itemView.setOnClickListener {
+                val action = ListFragmentDirections.actionListFragmentToDetailFragment(specification.uuid)
+                Navigation.findNavController(it).navigate(action)
+            }
+
+            favoriteImageView.setOnClickListener {
+                isFavorite = !isFavorite
+                updateFavoriteIcon()
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (isFavorite) {
+                        favoriteDao.insertFavoriteItem(specification)
+                    } else {
+                        favoriteDao.deleteFavoriteItem(specification)
+                    }
+                }
+            }
+        }
+
+        private fun updateFavoriteIcon() {
+            if (isFavorite) {
+                favoriteImageView.setImageResource(R.drawable.ic_favorite)
+            } else {
+                favoriteImageView.setImageResource(R.drawable.ic_favorite_border)
+            }
+        }
     }
 
-    // onCreateViewHolder metodu içinde LayoutInflater'ı kullanarak view'ı inflate ediyoruz.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecificationViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.row, parent, false)
         return SpecificationViewHolder(view)
     }
 
-    // getItemCount metodu ile liste elemanlarının sayısını döndürüyoruz.
+    override fun onBindViewHolder(holder: SpecificationViewHolder, position: Int) {
+        val specification = specificationList[position]
+        holder.bind(specification)
+        holder.nameTextView.text = specification.specificationName
+        holder.tagTextView.text = specification.specificationTag
+        holder.imageView.downloadFromUrl(
+            specification.specificationImage,
+            placeholderProgressBar(holder.itemView.context)
+        )
+    }
+
     override fun getItemCount(): Int {
         return specificationList.size
     }
 
-    // onBindViewHolder metodu ile ViewHolder'ın view'larına verileri yerleştiriyoruz.
-    override fun onBindViewHolder(holder: SpecificationViewHolder, position: Int) {
-        val specification = specificationList[position]
-        holder.nameTextView.text = specificationList[position].specificationName
-        holder.tagTextView.text = specificationList[position].specificationTag
-
-        holder.itemView.setOnClickListener {
-            val action = ListFragmentDirections.actionListFragmentToDetailFragment(specification.uuid)
-            Navigation.findNavController(it).navigate(action)
-        }
-
-
-
-
-        holder.imageView.downloadFromUrl(specificationList[position].specificationImage, placeholderProgressBar(holder.itemView.context))
-
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateSpecificationList(newSpecificationList: List<Specification>){
-        specificationList.clear()
-        specificationList.addAll(newSpecificationList)
-        notifyDataSetChanged()
+    fun getFavoriteItems(): List<Specification> {
+        return specificationList.filter { it.isFavorite }
     }
 }
