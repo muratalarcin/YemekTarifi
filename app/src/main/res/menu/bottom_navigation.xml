@@ -10,6 +10,6 @@
         android:id="@+id/navigation_favorite"
         android:enabled="true"
         android:title="Favoriler"
-        android:icon="@drawable/ic_favorite" />
+        android:icon="@drawable/ic_favorite_fill" />
 </menu>
 

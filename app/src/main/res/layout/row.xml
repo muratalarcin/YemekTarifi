@@ -74,6 +74,13 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fav_button"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_favorite"/>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
