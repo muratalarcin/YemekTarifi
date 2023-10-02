@@ -26,7 +26,7 @@ class ProfilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.profilFragmentButton.setOnClickListener {
-            findNavController().navigate(R.id.action_profilFragment_to_favoriteFragment)
+            findNavController().navigate(R.id.action_search)
         }
     }
 

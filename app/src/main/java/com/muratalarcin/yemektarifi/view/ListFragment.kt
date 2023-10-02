@@ -12,6 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muratalarcin.yemektarifi.R
 import com.muratalarcin.yemektarifi.adapter.SpecificationAdapter
@@ -31,6 +32,20 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true) // SearchView'i etkinleştir
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.navigation_favorite -> {
+                    // Favori butonuna tıklandığında yapılacak işlemler
+                    val action = ListFragmentDirections.actionListFragmentToFavoriteFragment()
+                    Navigation.findNavController(requireView()).navigate(action)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
         return binding.root
     }
 
