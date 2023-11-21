@@ -1,2 +1,2 @@
 # YemekTarifi
-My first google play app
+My first google play app 
